@@ -3,36 +3,42 @@ package com.springmongodb.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="USER")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 172452102185203369L;
 	
-	private Long id;
-	private String nome;
+	@Id
+	private String id;
+	
+	private String name;
 	private String email;
 	
 	public User() {}
 	
-	public User(Long id, String nome, String email) {
+	public User(String id, String name, String email) {
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.email = email;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getname() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setname(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
