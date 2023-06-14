@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="USER")
 public class User implements Serializable {
@@ -12,24 +13,25 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 172452102185203369L;
 	
 	@Id
-	private String id;
+	@Field("id")
+	private Long id;
 	
 	private String name;
 	private String email;
 	
 	public User() {}
 	
-	public User(String id, String name, String email) {
+	public User(Long id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
