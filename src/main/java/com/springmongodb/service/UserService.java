@@ -21,7 +21,7 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public User findById(Long id) {
+	public User findById(String id) {
 		Optional<User> obj = userRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
