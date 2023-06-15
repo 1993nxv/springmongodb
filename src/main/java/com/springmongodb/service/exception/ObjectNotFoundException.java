@@ -1,4 +1,4 @@
-package com.springmongodb.services.exception;
+package com.springmongodb.service.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
 

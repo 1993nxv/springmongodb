@@ -2,13 +2,15 @@ package com.springmongodb.DTO;
 
 import java.io.Serializable;
 
+import org.bson.types.ObjectId;
+
 import com.springmongodb.domain.User;
 
 public class UserDTO implements Serializable {
 	
 	private static final long serialVersionUID = 2269586328383522536L;
 	
-	private Long id;
+	private ObjectId id;
 	private String name;
 	private String email;
 	
@@ -21,11 +23,11 @@ public class UserDTO implements Serializable {
 		this.email = user.getEmail();
 	}
 
-	public Long getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

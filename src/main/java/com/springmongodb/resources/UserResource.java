@@ -1,18 +1,23 @@
 package com.springmongodb.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.springmongodb.DTO.UserDTO;
 import com.springmongodb.domain.User;
-import com.springmongodb.services.UserService;
+import com.springmongodb.service.UserService;
 
 @RestController
 @RequestMapping(value="/users")
@@ -33,9 +38,23 @@ public class UserResource {
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
-		User user = userService.findById(id);
+	public ResponseEntity<UserDTO> findById(@PathVariable ObjectId id){
+		User user = userService.findById((Long) id);
 		
 		return ResponseEntity.ok().body(new UserDTO(user));
+	}
+	
+	@PostMapping
+	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDTO){
+		User user = userService.fromDTO(userDTO);
+		user = userService.insert(user);
+		
+		URI uri = ServletUriComponentsBuilder
+				  .fromCurrentRequest()
+				  .path("/{id}")
+				  .buildAndExpand(user.getId())
+				  .toUri();
+		
+		return ResponseEntity.created(uri).body(userDTO);
 	}
 }
