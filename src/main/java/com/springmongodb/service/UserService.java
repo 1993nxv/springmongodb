@@ -38,4 +38,8 @@ public class UserService {
 		);
 	}
 	
+	public void delete(String id) {
+		userRepository.deleteById(id);
+	}
+	
 }
